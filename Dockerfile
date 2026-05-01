@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates curl git build-essential sudo \
       gnupg unzip locales \
-      ripgrep fd-find jq zsh \
+      ripgrep fd-find jq zsh vim \
  && rm -rf /var/lib/apt/lists/* \
  && locale-gen en_US.UTF-8
 
