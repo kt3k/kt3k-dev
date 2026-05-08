@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates curl git build-essential sudo \
       gnupg unzip locales \
-      ripgrep fd-find jq zsh vim tmux \
+      ripgrep fd-find jq zsh vim tmux stow \
  && rm -rf /var/lib/apt/lists/* \
  && locale-gen en_US.UTF-8
 
@@ -33,4 +33,11 @@ RUN mise trust ~/.config/mise/config.toml && mise install -y
 ARG CLAUDE_CODE_VERSION=2.1.123
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} && mise reshim
 
-CMD ["zsh"]
+ARG DOTFILES_REF=main
+ADD https://api.github.com/repos/kt3k/dotfiles/commits/${DOTFILES_REF} /tmp/dotfiles-version.json
+RUN git clone --depth=1 --branch ${DOTFILES_REF} \
+      https://github.com/kt3k/dotfiles.git /home/dev/dotfiles \
+ && cd /home/dev/dotfiles \
+ && stow -t /home/dev */
+
+CMD ["zsh", "-l"]
