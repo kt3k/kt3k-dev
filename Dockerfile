@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates curl git build-essential sudo \
       gnupg unzip locales \
       ripgrep fd-find jq zsh vim tmux stow \
+      openssh-server \
  && rm -rf /var/lib/apt/lists/* \
  && locale-gen en_US.UTF-8
 
