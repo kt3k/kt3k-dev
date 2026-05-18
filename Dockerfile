@@ -32,7 +32,15 @@ RUN mise trust ~/.config/mise/config.toml && mise install -y
 
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
 ARG CLAUDE_CODE_VERSION=2.1.123
-RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} && mise reshim
+# renovate: datasource=npm depName=@openai/codex
+ARG CODEX_VERSION=0.130.0
+# renovate: datasource=npm depName=opencode-ai
+ARG OPENCODE_VERSION=1.15.4
+RUN npm install -g \
+      @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} \
+      @openai/codex@${CODEX_VERSION} \
+      opencode-ai@${OPENCODE_VERSION} \
+ && mise reshim
 
 ARG DOTFILES_REF=main
 ADD https://api.github.com/repos/kt3k/dotfiles/commits/${DOTFILES_REF} /tmp/dotfiles-version.json
