@@ -25,7 +25,8 @@ RUN curl https://mise.run | sh
 ENV PATH=/home/dev/.local/share/mise/shims:/home/dev/.local/bin:${PATH}
 RUN echo 'eval "$(mise activate zsh)"' >> ~/.zshrc \
  && echo 'export PROMPT="%m:%2~ $ "' >> ~/.zshrc \
- && echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+ && echo 'eval "$(mise activate bash)"' >> ~/.bashrc \
+ && echo 'export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"' >> ~/.profile
 
 COPY --chown=dev:dev mise.toml /home/dev/.config/mise/config.toml
 RUN mise trust ~/.config/mise/config.toml && mise install -y
