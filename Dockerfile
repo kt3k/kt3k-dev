@@ -3,7 +3,7 @@ FROM ubuntu:26.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      ca-certificates curl git build-essential sudo \
+      ca-certificates curl git sudo \
       gnupg unzip locales \
       ripgrep fd-find jq zsh vim tmux stow \
       openssh-server \
@@ -41,6 +41,8 @@ RUN npm install -g \
       @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} \
       @openai/codex@${CODEX_VERSION} \
       opencode-ai@${OPENCODE_VERSION} \
+ && npm cache clean --force \
+ && rm -rf ~/.npm/_logs \
  && mise reshim
 
 ARG DOTFILES_REF=main
