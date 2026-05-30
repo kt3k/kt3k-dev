@@ -33,7 +33,7 @@ COPY --chown=dev:dev mise.toml /home/dev/.config/mise/config.toml
 RUN mise trust ~/.config/mise/config.toml && mise install -y
 
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.123
+ARG CLAUDE_CODE_VERSION=2.1.157
 # renovate: datasource=npm depName=@openai/codex
 ARG CODEX_VERSION=0.130.0
 # renovate: datasource=npm depName=opencode-ai
