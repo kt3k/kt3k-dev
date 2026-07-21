@@ -11,6 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/* \
  && locale-gen en_US.UTF-8
 
+RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/resolute.noarmor.gpg -o /usr/share/keyrings/tailscale-archive-keyring.gpg \
+ && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/resolute.tailscale-keyring.list -o /etc/apt/sources.list.d/tailscale.list \
+ && apt-get update && apt-get install -y --no-install-recommends tailscale \
+ && rm -rf /var/lib/apt/lists/*
+
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 RUN userdel -r ubuntu 2>/dev/null || true \
